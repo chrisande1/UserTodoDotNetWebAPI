@@ -24,10 +24,11 @@ namespace UserTodoDotNetWebAPI.Services.Repository
             await _dBContext.SaveChangesAsync();
             return targetUser;
         }
-        public bool CheckIfEmailExists(string Email)
+        public async Task<bool> CheckIfEmailExists(string Email)
         {
-            return _dBContext.Users.Any(user => user.Email == Email);
+            return await _dBContext.Users.AnyAsync(u => u.Email == Email);
         }
+
 
         public async Task<User?> GetUserByEmail(string Email)
         {

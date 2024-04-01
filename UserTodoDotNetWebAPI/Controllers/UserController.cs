@@ -33,7 +33,9 @@ namespace UserTodoDotNetWebAPI.Controllers
                 Password = _passwordService.HashPassword(register.Password)
             };
 
-            if (_userRepository.CheckIfEmailExists(user.Email))
+            
+
+            if (await _userRepository.CheckIfEmailExists(user.Email))
             {
                 return BadRequest("Email already exists!");
             }
@@ -55,7 +57,10 @@ namespace UserTodoDotNetWebAPI.Controllers
             {
                 return NotFound("Incorrect Email or Password!");
             }
-
+            if(user.DeletedAt != null)
+            {
+                return NotFound("Incorrect Email or Password!");
+            }
             if (!_passwordService.VerifyPassword(password, user.Password))
             {
                 return BadRequest("Incorrect Email or Password!");

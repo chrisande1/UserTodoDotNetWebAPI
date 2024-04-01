@@ -11,7 +11,7 @@ namespace UserTodoDotNetWebAPI.Data
         }
 
         public DbSet<User> Users { get; set; }
-
+        public DbSet<Todo> Todos { get; set; }
 
     }
 }

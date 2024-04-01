@@ -24,6 +24,7 @@ namespace UserTodoDotNetWebAPI.Services.Repository
                 new Claim(JwtRegisteredClaimNames.Sid, user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Name, user.Name)
                 
+                
 
             };
 

@@ -6,6 +6,6 @@ namespace UserTodoDotNetWebAPI.Services.Interface
     {
         public Task<User> Update(Guid Id, User user);
         public Task<User?> GetUserByEmail(string Email);
-        public bool CheckIfEmailExists(string Email);
+        public Task<bool> CheckIfEmailExists(string Email);
     }
 }

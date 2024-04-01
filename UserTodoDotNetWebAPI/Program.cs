@@ -73,15 +73,24 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DatabaseConnection"));
 });
 
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 builder.Services.AddScoped<IPasswordService, PasswordService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ITodoRepository, TodoRepository>();
+
 
 
 void ConfigureMapster()
 {
     TypeAdapterConfig<User, UserResponseDTO>.NewConfig()
         .Map(dest => dest.Name, src => src.Name);
+
+    TypeAdapterConfig<Todo, TodoResponseDTO>.NewConfig()
+        .Map(dest => dest.TodoId, src => src.Id)
+        .Map(dest => dest.Title, src => src.Title)
+        .Map(dest => dest.Description, src => src.Description)
+        .Map(dest => dest.User, src => src.User.Name);
 }
 
 var app = builder.Build();

@@ -36,10 +36,10 @@ namespace UserTodoDotNetWebAPI.Services.Repository
         public async virtual Task<TModel?> GetById(Guid Id)
         {
             return await _dBContext.Set<TModel>()
-                .FindAsync(Id);
-                
-
+                .Where(model => model.DeletedAt == null && model.Id == Id)
+                .FirstOrDefaultAsync();
         }
+
 
         public async virtual Task<TModel?> DeleteById(Guid Id)
         {
